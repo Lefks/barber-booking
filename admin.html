@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — Sharp & Co. (demo)</title>
+  <meta name="robots" content="noindex">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = { theme: { extend: {
+      fontFamily: { display: ['Oswald', 'sans-serif'], sans: ['Inter', 'sans-serif'] },
+      colors: { ink: '#111316', steel: '#1d2026', brass: '#d4a24c' }
+    } } }
+  </script>
+</head>
+<body class="bg-ink text-white font-sans antialiased min-h-screen">
+
+  <header class="max-w-6xl mx-auto flex items-center justify-between px-4 py-5">
+    <a href="index.html" class="font-display text-2xl tracking-wide">SHARP <span class="text-brass">&amp;</span> CO. <span class="text-white/40 text-base">admin</span></a>
+    <button id="logoutBtn" class="hidden text-sm border border-white/20 px-4 py-2 rounded hover:bg-white/10">Log out</button>
+  </header>
+
+  <!-- Login -->
+  <section id="loginView" class="max-w-sm mx-auto px-4 py-16 hidden">
+    <h1 class="font-display text-3xl mb-6">Staff login</h1>
+    <form id="loginForm" class="space-y-3">
+      <input id="email" type="email" required placeholder="Email" class="w-full bg-steel border border-white/10 rounded px-4 py-3 focus:outline-none focus:border-brass">
+      <input id="password" type="password" required placeholder="Password" class="w-full bg-steel border border-white/10 rounded px-4 py-3 focus:outline-none focus:border-brass">
+      <button class="w-full bg-brass text-ink py-3 rounded font-bold hover:bg-brass/90">Log in</button>
+      <p id="loginError" class="text-red-400 text-sm hidden">Wrong email or password.</p>
+    </form>
+  </section>
+
+  <!-- Dashboard -->
+  <section id="dashView" class="max-w-6xl mx-auto px-4 py-8 hidden">
+    <div class="grid grid-cols-3 gap-3 mb-8">
+      <div class="bg-steel rounded p-4"><p class="text-white/50 text-xs uppercase">New</p><p id="statNew" class="font-display text-3xl">0</p></div>
+      <div class="bg-steel rounded p-4"><p class="text-white/50 text-xs uppercase">Confirmed</p><p id="statConfirmed" class="font-display text-3xl">0</p></div>
+      <div class="bg-steel rounded p-4"><p class="text-white/50 text-xs uppercase">Cancelled</p><p id="statCancelled" class="font-display text-3xl">0</p></div>
+    </div>
+
+    <div class="flex flex-wrap items-center gap-3 mb-4">
+      <h2 class="font-display text-2xl mr-auto">Bookings</h2>
+      <select id="filter" class="bg-steel border border-white/10 rounded px-3 py-2 text-sm">
+        <option value="upcoming">Upcoming</option>
+        <option value="all">All</option>
+        <option value="new">New only</option>
+      </select>
+      <button id="refreshBtn" class="text-sm border border-white/20 px-4 py-2 rounded hover:bg-white/10">Refresh</button>
+    </div>
+
+    <div class="overflow-x-auto bg-steel rounded">
+      <table class="w-full text-sm">
+        <thead class="text-left text-white/50 border-b border-white/10">
+          <tr><th class="p-3">Date</th><th class="p-3">Time</th><th class="p-3">Client</th><th class="p-3">Phone</th><th class="p-3">Service</th><th class="p-3">Status</th><th class="p-3"></th></tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <script type="module" src="admin.js"></script>
+</body>
+</html>
