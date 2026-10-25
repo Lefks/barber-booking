@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sharp & Co. Barbers — Book online (demo)</title>
+  <meta name="description" content="Demo barbershop website with online booking powered by Firebase.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = { theme: { extend: {
+      fontFamily: { display: ['Oswald', 'sans-serif'], sans: ['Inter', 'sans-serif'] },
+      colors: { ink: '#111316', steel: '#1d2026', brass: '#d4a24c' }
+    } } }
+  </script>
+  <style>html { scroll-behavior: smooth; }</style>
+</head>
+<body class="bg-ink text-white font-sans antialiased">
+
+  <div class="bg-brass text-ink text-center text-xs py-2 px-4 font-medium">Demo project — fictional barbershop. Bookings are saved to a real Firebase database.</div>
+
+  <header class="max-w-6xl mx-auto flex items-center justify-between px-4 py-5">
+    <a href="#" class="font-display text-2xl tracking-wide">SHARP <span class="text-brass">&amp;</span> CO.</a>
+    <a href="#book" class="bg-brass text-ink px-5 py-2 rounded font-semibold text-sm hover:bg-brass/90">Book now</a>
+  </header>
+
+  <section class="max-w-6xl mx-auto px-4 py-16 md:py-24">
+    <p class="text-brass uppercase tracking-[0.3em] text-xs font-semibold mb-4">Classic cuts · Hot towel shaves</p>
+    <h1 class="font-display text-5xl md:text-7xl font-bold leading-none mb-6">Look sharp.<br>Book in 30 seconds.</h1>
+    <p class="text-white/70 text-lg max-w-xl mb-8">Pick a service, choose a free time and you're done. No calls, no waiting on hold.</p>
+    <a href="#book" class="inline-block bg-white text-ink px-6 py-3 rounded font-semibold hover:bg-white/90">Choose a time</a>
+  </section>
+
+  <section class="bg-steel py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="font-display text-3xl md:text-4xl mb-8">Services</h2>
+      <div id="serviceList" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
+    </div>
+  </section>
+
+  <section id="book" class="max-w-3xl mx-auto px-4 py-16 md:py-24">
+    <h2 class="font-display text-3xl md:text-4xl mb-2">Book your visit</h2>
+    <p class="text-white/60 mb-10">Times already booked are shown as unavailable.</p>
+
+    <form id="bookingForm" class="space-y-8">
+      <div>
+        <p class="font-semibold mb-3"><span class="text-brass">1.</span> Service</p>
+        <div id="serviceOptions" class="grid sm:grid-cols-2 gap-3"></div>
+      </div>
+
+      <div>
+        <p class="font-semibold mb-3"><span class="text-brass">2.</span> Day</p>
+        <div id="dayOptions" class="flex gap-2 overflow-x-auto pb-2"></div>
+      </div>
+
+      <div>
+        <p class="font-semibold mb-3"><span class="text-brass">3.</span> Time</p>
+        <div id="timeOptions" class="grid grid-cols-3 sm:grid-cols-5 gap-2">
+          <p class="col-span-full text-white/50 text-sm">Choose a day first.</p>
+        </div>
+      </div>
+
+      <div>
+        <p class="font-semibold mb-3"><span class="text-brass">4.</span> Your details</p>
+        <div class="grid sm:grid-cols-2 gap-3">
+          <input id="name" required maxlength="80" placeholder="Name" class="bg-steel border border-white/10 rounded px-4 py-3 focus:outline-none focus:border-brass">
+          <input id="phone" required maxlength="25" type="tel" placeholder="Phone" class="bg-steel border border-white/10 rounded px-4 py-3 focus:outline-none focus:border-brass">
+        </div>
+      </div>
+
+      <div class="bg-steel rounded p-4 text-sm" id="summary">Nothing selected yet.</div>
+
+      <button id="submitBtn" type="submit" class="w-full bg-brass text-ink py-4 rounded font-bold text-lg hover:bg-brass/90 disabled:opacity-50">Confirm booking</button>
+      <p id="message" class="text-center text-sm hidden"></p>
+    </form>
+  </section>
+
+  <footer class="border-t border-white/10 py-8 text-center text-sm text-white/40">
+    © <span id="year"></span> Sharp &amp; Co. — demo project · <a href="admin.html" class="underline hover:text-white">Admin</a>
+  </footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
